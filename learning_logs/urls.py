@@ -6,5 +6,5 @@ from .views import index
 
 urlpatterns = [
     #Strona główna
-    path('', index),
+    path('', index, name='index'),
 ]
