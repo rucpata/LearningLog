@@ -1,10 +1,10 @@
 """Definiuje wzorzec adresów URL dla learning_log."""
 
-from django.conf.urls import url
+from django.urls import path
 
-from . import views
+from .views import index
 
 urlpatterns = [
     #Strona główna
-    url(r'^$', views.index),
+    path('', index),
 ]
