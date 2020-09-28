@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect #Przekierowanie uzytkownika po dodaniu nowego tematu do strony topic
-from django.core.urlresolvers import reverse 
+from django.urls import reverse 
 
 from .models import Topic
-from .models import TopicForm
+from .forms import TopicForm
+
+
 
 def index(request):
     """Strona główna aplikacji Learning Log."""
@@ -23,16 +25,13 @@ def topic(request, topic_id):
     return render(request, 'learning_logs/topic.html', context)
 
 def new_topic(request):
-    """Dodaj nowy temat"""
+    """Dodanie nowego tematu"""
     if request.method != 'POST':
-        #Nie przekazano zadnych danych nalezy utowrzyc pusty formularz
         form = TopicForm()
     else:
-        #Przekazano dane za pomoca zadania POST, nalezy je przetworzyc
-        form = TopicForm(request.POST)
+        form = TopicForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('topcs'))
-
-        context = {'form': form}
-        return render(request, 'new_topic.html', context)
+            return redirect('topics')
+    context = {'form': form}
+    return render(request, 'learning_logs/new_topic.html', context)

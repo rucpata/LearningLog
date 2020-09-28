@@ -2,7 +2,7 @@
 
 from django.urls import path
 
-from .views import index, topics, topic
+from .views import index, topics, topic, new_topic
 
 urlpatterns = [
     #Strona główna
