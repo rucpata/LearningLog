@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect #Przekierowanie uzytkownika po dodaniu nowego tematu do strony topic
 from django.urls import reverse 
 
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
 
@@ -56,3 +56,21 @@ def new_entry(request, topic_id):
         
     context = {'topic': topic, 'form': form}
     return render(request, 'learning_logs/new_entry.html', context)
+
+def edit_entry(request, entry_id):
+    """Edycja istniejącego wpisu"""
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        #Żądanie początkowe wypełnienie formularza aktualną treścią wpisu
+        form = EntryForm(instance=entry)
+    else: 
+        #Przekazano dane za pomocą zadania POST, nalezy je przetworzyć 
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('topic', topic_id=topic.id)
+    
+    context = {'entry': entry, 'topic': topic, 'form': form}
+    return render(request, 'learning_logs/edit_entry.html', context)
