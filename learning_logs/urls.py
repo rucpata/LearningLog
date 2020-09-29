@@ -2,7 +2,7 @@
 
 from django.urls import path
 
-from .views import index, topics, topic, new_topic
+from .views import index, topics, topic, new_topic, new_entry
 
 urlpatterns = [
     #Strona główna
@@ -13,4 +13,6 @@ urlpatterns = [
     path('topics/<topic_id>', topic, name='topic'),
     #Strona przeznaczona do dodawania nowego tematu
     path('new_topic/', new_topic, name='new_topic'),
+    #Strona przeznaczona do dodawania nowego wpisu
+    path('new_entry/<topic_id>', new_entry, name='new_entry'),
 ]
