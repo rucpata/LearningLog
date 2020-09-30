@@ -4,6 +4,8 @@ from django.urls import path
 
 from .views import index, topics, topic, new_topic, new_entry, edit_entry
 
+app_name = 'learning_logs'
+
 urlpatterns = [
     #Strona główna
     path('', index, name='index'),
