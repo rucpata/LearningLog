@@ -10,6 +10,7 @@
             </li>
         {% empty %}
             <li>Nie został jeszcze dodany aden temat.</li>
+            <li><a href="{% url 'learning_logs:new_topic' %}">Dodaj temat</a></li>
         {% endfor %}
     </ul>
 
