@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.http import HttpResponseRedirect #Przekierowanie uzytkownika po dodaniu nowego tematu do strony topic
 from django.contrib.auth.decorators import login_required
-
+from django.http import Http404
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
@@ -38,8 +38,7 @@ def new_topic(request):
     else:
         #Przekazano dane za pomocą zadania POST, nalezy je przetowrzyc
         form = TopicForm(data=request.POST)
-        if topic.owner != request.user:
-            raise Http404
+    
 
         if form.is_valid():
             new_topic = form.save(commit=False)
