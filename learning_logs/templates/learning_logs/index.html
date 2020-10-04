@@ -1,6 +1,6 @@
 {% extends 'learning_logs/base.html'%}
 
-{% block content %}
+{% block page_header %}
     <div class="jumbotron">
         <h1 class="display-3">Monitoruj postępy w nauce</h1>
         
@@ -11,4 +11,4 @@
         <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" 
         role="button">Zarejestruj konto</a>
     </div>
-{% endblock content%}
+{% endblock page_header %}
