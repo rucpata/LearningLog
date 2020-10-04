@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users',
 
     #Aplikacje innych firm
-    'bootstrap3',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +129,3 @@ STATIC_URL = '/static/'
 #Moje ustawienia
 LOGIN_URL = '/users/login/'
 
-#Ustawienia dla django-bootstrap4
-BOOTSTRAP3 = {
-    'include_jquery': True,
-}
