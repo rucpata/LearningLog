@@ -3,12 +3,19 @@
 {% block page_header %}
     <div class="jumbotron">
         <h1 class="display-3">Monitoruj postępy w nauce</h1>
-        
-        <p class="lead">Zrób swój własny dziennik nauki i prowadź listę tematów, o których się uczysz. Za 
+        {% if user.is_authenticated %}
+            <p class="lead">Zrób swój własny dziennik nauki i prowadź listę tematów, o których się uczysz. Za 
         każdym razem, gdy dowiesz się czegoś nowego na jakiś temat, zrób wpis podsumowujący to, czego 
         się nauczyłeś.</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'learning_logs:new_topic' %}" 
+            role="button">Dodaj temat</a>
+        {% else %}
+            <p class="lead">Zrób swój własny dziennik nauki i prowadź listę tematów, o których się uczysz. Za 
+            każdym razem, gdy dowiesz się czegoś nowego na jakiś temat, zrób wpis podsumowujący to, czego 
+            się nauczyłeś.</p>
 
-        <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" 
-        role="button">Zarejestruj konto</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" 
+            role="button">Zarejestruj konto</a>
+        {% endif %}
     </div>
 {% endblock page_header %}
