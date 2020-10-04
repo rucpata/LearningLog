@@ -14,7 +14,8 @@ def index(request):
 @login_required
 def topics(request):
     """Wyświetlenie wszystkich tematów"""
-    topics = Topic.objects.filter(owner=request.user).order_by('data_added')
+    #Uzytkownik widzi tylko tematy dodane przez siebie
+    topics = Topic.objects.filter(owner=request.user).order_by('data_added') 
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -22,6 +23,9 @@ def topics(request):
 def topic(request, topic_id):
     """Wyświetla pojedyńczy temat i wszystkie powiązane z nim wpisy."""
     topic = Topic.objects.get(id=topic_id)
+    #Upewniamy sie, ze temat nalezy do biezacego uzytkownika
+    if topic.owner != request.user:
+        raise Http404
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
@@ -36,8 +40,10 @@ def new_topic(request):
         #Przekazano dane za pomocą zadania POST, nalezy je przetowrzyc
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('topics')
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
+            return redirect('learning_logs:topics')
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
 
@@ -56,7 +62,7 @@ def new_entry(request, topic_id):
             new_entry = form.save(commit=False)
             new_entry.topic = topic
             new_entry.save()
-            return redirect('topic', topic_id=topic_id)
+            return redirect('learning_logs:topic', topic_id=topic_id)
         
     context = {'topic': topic, 'form': form}
     return render(request, 'learning_logs/new_entry.html', context)
@@ -75,7 +81,7 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('topic', topic_id=topic.id)
+            return redirect('learning_logs:topic', topic_id=topic.id)
     
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
