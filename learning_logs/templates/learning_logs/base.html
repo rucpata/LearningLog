@@ -1,14 +1,24 @@
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="pl">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv=""
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Learning Log</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
   </head>
 
+  <body>
+    <!--Statyczny pasek nawigacyjny -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 border">
+      <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+  </body>
 
 
-
+ <!--
 <p>
   <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
   <a href="{% url 'learning_logs:topics' %}">Tematy</a> - 
@@ -24,3 +34,4 @@
 {% block content %}
 
 {% endblock content %}
+-->
