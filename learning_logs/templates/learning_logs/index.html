@@ -1,5 +1,14 @@
 {% extends 'learning_logs/base.html'%}
 
 {% block content %}
-    <p>Learning Log pomaga w monitorowaniu postępów w nauce</p>
+    <div class="jumbotron">
+        <h1 class="display-3">Monitoruj postępy w nauce</h1>
+        
+        <p class="lead">Zrób swój własny dziennik nauki i prowadź listę tematów, o których się uczysz. Za 
+        każdym razem, gdy dowiesz się czegoś nowego na jakiś temat, zrób wpis podsumowujący to, czego 
+        się nauczyłeś.</p>
+
+        <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" 
+        role="button">Zarejestruj konto</a>
+    </div>
 {% endblock content%}
