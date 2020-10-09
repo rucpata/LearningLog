@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 def logout_view(request):
     """Wylogowanie uzytkownia"""
     logout(request)
-    return render(request, 'learning_log:index')
+    return render(request, 'learning_logs:index')
 
 def register(request):
     """Register a new user."""
@@ -23,7 +23,7 @@ def register(request):
             new_user = form.save()
             # Log the user in and then redirect to home page.
             login(request, new_user)
-            return redirect('learning_logs:index.html')
+            return redirect('learning_logs:index')
            
 
     # Display a blank or invalid form.
