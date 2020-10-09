@@ -9,11 +9,15 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import django_heroku
+
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '*6no4*mvlc6+7(7+n(zlcpjl$29m=t*q1dwp!)tf0mnqi7s71g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['mighty-fjord-60816.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['learninglog20.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -56,12 +60,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-MIDDLEWARE_CLASSES = (
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-)
-
 ROOT_URLCONF = 'learning_log.urls'
 
 TEMPLATES = [
@@ -88,7 +86,7 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresq1',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -130,15 +128,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 #Moje ustawienia
 LOGIN_URL = '/users/login/'
 
-
-django_heroku.settings(locals())
